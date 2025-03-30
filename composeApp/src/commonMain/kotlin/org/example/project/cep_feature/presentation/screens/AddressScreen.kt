@@ -5,15 +5,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -44,7 +43,7 @@ fun AddressScreen(viewModel: AddressViewModel = koinViewModel()) {
                 viewModel.clearAddress()
             }, label = { Text("Cep") })
             Spacer(Modifier.height(8.dp))
-            Button(
+            ElevatedButton(
                 onClick = { viewModel.getAddress() }, enabled = addressState != UiState.Loading
             ) {
                 Text("Buscar CEP")

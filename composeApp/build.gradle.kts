@@ -53,6 +53,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.compose.material3)
+
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
