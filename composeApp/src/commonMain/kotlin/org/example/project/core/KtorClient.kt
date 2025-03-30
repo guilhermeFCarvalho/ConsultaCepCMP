@@ -5,17 +5,18 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 
 class KtorClient() {
-    private val BASE_URL = "https://viacep.com.br/ws"
-    private val httpClient = HttpClient() {
+    private val baseUrl = "https://viacep.com.br/ws"
+     val httpClient = HttpClient {
         install(ContentNegotiation) {
-            json()
+            json(Json { ignoreUnknownKeys = true })
         }
     }
 
     internal suspend inline fun <reified T> get(endpoint: String): T {
-        return httpClient.get("$BASE_URL/$endpoint").body()
+        return httpClient.get("$baseUrl/$endpoint").body()
     }
 }
