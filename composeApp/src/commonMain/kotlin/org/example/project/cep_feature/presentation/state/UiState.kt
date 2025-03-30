@@ -1,5 +1,4 @@
-package org.example.project.cep_feature.presentation
-
+package org.example.project.cep_feature.presentation.state
 
 sealed class UiState<out T> {
     object Initial : UiState<Nothing>()

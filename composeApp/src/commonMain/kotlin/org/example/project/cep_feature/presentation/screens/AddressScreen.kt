@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
@@ -17,9 +18,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import org.example.project.cep_feature.domain.model.AddressEntity
-import org.example.project.cep_feature.presentation.UiState
+import org.example.project.cep_feature.presentation.state.UiState
 import org.example.project.cep_feature.presentation.components.AddressComponent
 import org.example.project.cep_feature.presentation.viewmodel.AddressViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -38,13 +40,18 @@ fun AddressScreen(viewModel: AddressViewModel = koinViewModel()) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
         ) {
-            OutlinedTextField(value = cepState, onValueChange = {
-                viewModel.cepChanged(cep = it)
-                viewModel.clearAddress()
-            }, label = { Text("Cep") })
+            OutlinedTextField(
+                value = cepState.cep,
+                onValueChange = {
+                    viewModel.cepChanged(cep = it.toString())
+                    viewModel.clearAddress()
+                },
+                label = { Text("Cep") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            )
             Spacer(Modifier.height(8.dp))
             ElevatedButton(
-                onClick = { viewModel.getAddress() }, enabled = addressState != UiState.Loading
+                onClick = { viewModel.getAddress() }, enabled = viewModel.isSearchEnabled()
             ) {
                 Text("Buscar CEP")
             }
