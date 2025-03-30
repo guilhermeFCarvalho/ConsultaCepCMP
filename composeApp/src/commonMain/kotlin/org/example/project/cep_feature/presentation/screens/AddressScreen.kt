@@ -48,10 +48,12 @@ fun AddressScreen(viewModel: AddressViewModel = koinViewModel()) {
                 },
                 label = { Text("Cep") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                enabled = addressState != UiState.Loading
             )
             Spacer(Modifier.height(8.dp))
             ElevatedButton(
-                onClick = { viewModel.getAddress() }, enabled = viewModel.isSearchEnabled()
+                onClick = { viewModel.getAddress() },
+                enabled = cepState.isCepValid && addressState != UiState.Loading
             ) {
                 Text("Buscar CEP")
             }
