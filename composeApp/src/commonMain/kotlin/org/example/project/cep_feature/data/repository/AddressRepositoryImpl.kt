@@ -5,7 +5,7 @@ import org.example.project.cep_feature.domain.model.AddressEntity
 import org.example.project.cep_feature.domain.repository.AddressRepository
 
 class AddressRepositoryImpl(private val service: AddressService) : AddressRepository {
-    override suspend fun getAddress(cep: String): AddressEntity {
+    override suspend fun getAddress(cep: String): Result<AddressEntity> {
         return service.getAddress(cep = cep)
     }
 }

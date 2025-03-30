@@ -17,6 +17,6 @@ class KtorClient() {
     }
 
     internal suspend inline fun <reified T> get(endpoint: String): T {
-        return httpClient.get("$baseUrl/$endpoint").body()
+        return httpClient.get("$baseUrl/$endpoint/json").body()
     }
 }
