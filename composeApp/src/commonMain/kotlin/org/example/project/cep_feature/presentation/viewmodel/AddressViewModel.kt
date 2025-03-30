@@ -28,12 +28,18 @@ class AddressViewModel(private val addressRepository: AddressRepository) : ViewM
             delay(timeMillis = 1500)
             addressRepository.getAddress(cepState.value.cep)
                 .onSuccess { address ->
-                    _addressState.value =
-                        UiState.Success<AddressEntity>(address)
+                    if (address.error) {
+                        _addressState.value = UiState.Error("Cep não encontrado")
+
+                    } else {
+                        _addressState.value =
+                            UiState.Success<AddressEntity>(address)
+                    }
+
                 }
                 .onFailure { error ->
                     _addressState.value =
-                        UiState.Error("Ocorreu um erro, verifique o cep e tente novamente")
+                        UiState.Error("Ocorreu um erro, verifique a conexão e tente novamente")
                 }
 
         }
@@ -45,10 +51,6 @@ class AddressViewModel(private val addressRepository: AddressRepository) : ViewM
             isValidCep(cep),
         )
 
-    }
-
-    fun clearAddress() {
-        _addressState.value = UiState.Initial
     }
 
 

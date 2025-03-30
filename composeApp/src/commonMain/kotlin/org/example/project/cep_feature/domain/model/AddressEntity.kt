@@ -14,7 +14,9 @@ data class AddressEntity(
     @SerialName("localidade")
     val city: String = "",
     @SerialName("uf")
-    val state: String = ""
+    val state: String = "",
+    @SerialName("erro")
+    val error : Boolean = false
 )
 
 
