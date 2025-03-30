@@ -4,7 +4,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -25,7 +24,6 @@ class AddressViewModel(private val addressRepository: AddressRepository) : ViewM
     fun getAddress() {
         _addressState.value = UiState.Loading
         viewModelScope.launch {
-            delay(timeMillis = 1500)
             addressRepository.getAddress(cepState.value.cep)
                 .onSuccess { address ->
                     if (address.error) {
