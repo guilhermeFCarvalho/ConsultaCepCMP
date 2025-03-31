@@ -59,7 +59,6 @@ fun AddressScreen(viewModel: AddressViewModel = koinViewModel()) {
                 value = cepState.cep,
                 onValueChange = {
                     viewModel.cepChanged(cep = it.toString())
-
                 },
                 label = { Text("Cep") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),

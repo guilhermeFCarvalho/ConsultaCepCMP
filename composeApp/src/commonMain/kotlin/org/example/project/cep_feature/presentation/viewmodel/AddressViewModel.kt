@@ -44,6 +44,7 @@ class AddressViewModel(private val addressRepository: AddressRepository) : ViewM
     }
 
     fun cepChanged(cep: String) {
+        _addressState.value = UiState.Initial
         _cepState.value = cepState.value.copy(
             cep = cep,
             isValidCep(cep),
